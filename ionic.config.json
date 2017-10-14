@@ -2,5 +2,7 @@
   "name": "GothicStoryAssistant",
   "app_id": "3f37c88c",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }

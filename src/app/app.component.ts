@@ -6,6 +6,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
+import firebase from 'firebase';
+
+import { FIREBASE_CREDENTIALS } from './credentials';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -16,7 +20,8 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {    
+    firebase.initializeApp(FIREBASE_CREDENTIALS);
     this.initializeApp();
 
     // used for an example of ngFor and navigation
