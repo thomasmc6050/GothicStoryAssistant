@@ -10,5 +10,15 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
 
   }
+  goToProfile(): void {
+    this.navCtrl.push("ProfilePage");
+  }
 
+  goToCreate(): void {
+    this.navCtrl.push("CharacterCreatePage");
+  }
+
+  goToList(): void {
+    this.navCtrl.push("CharacterListPage");
+  }
 }

@@ -4,6 +4,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goToProfile()">
+        <ion-icon name="person"></ion-icon>
+        </button>
+    </ion-buttons>    
   </ion-navbar>
 </ion-header>
 
@@ -15,4 +20,13 @@
   </p>
 
   <button ion-button secondary menuToggle>Toggle Menu</button>
+<h4>Tutorial Content</h4>
+  <button ion-button block color="primary" (click)="goToCreate()">
+    Provide Detail about your Player Character
+  </button>
+
+  <button ion-button block color="primary" (click)="goToList()">
+    See all characters
+  </button>
+
 </ion-content>

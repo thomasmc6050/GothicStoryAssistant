@@ -16,12 +16,23 @@ import { FIREBASE_CREDENTIALS } from './credentials';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any;
 
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {    
     firebase.initializeApp(FIREBASE_CREDENTIALS);
+
+  const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+    if (!user) {
+      this.rootPage = 'LoginPage';
+      unsubscribe();
+    } else {
+      this.rootPage = HomePage;
+      unsubscribe();
+    }
+  });
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
