@@ -1,25 +1,28 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the CharacterCreatePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Component } from "@angular/core";
+import { IonicPage, NavController } from "ionic-angular";
+import { CharacterProvider } from "../../providers/character/character";
 
 @IonicPage()
 @Component({
-  selector: 'page-character-create',
-  templateUrl: 'character-create.html',
+  selector: "page-character-create",
+  templateUrl: "character-create.html"
 })
 export class CharacterCreatePage {
+  constructor(
+    public navCtrl: NavController,
+    public characterProvider: CharacterProvider
+  ) {}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  createCharacter(
+    characterName: string,
+    characterDate: string,
+    characterPrice: number,
+    characterCost: number
+  ): void {
+    this.characterProvider
+      .createCharacter(characterName, characterDate, characterPrice, characterCost)
+      .then(newCharacter => {
+        this.navCtrl.pop();
+      });
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CharacterCreatePage');
-  }
-
 }

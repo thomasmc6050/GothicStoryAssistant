@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { CharacterCreatePage } from './character-create';
 
 @NgModule({
-  declarations: [
-    CharacterCreatePage,
-  ],
-  imports: [
-    IonicPageModule.forChild(CharacterCreatePage),
-  ],
+  declarations: [CharacterCreatePage],
+  imports: [IonicPageModule.forChild(CharacterCreatePage)]
 })
 export class CharacterCreatePageModule {}
