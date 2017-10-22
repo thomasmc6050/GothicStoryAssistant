@@ -47,13 +47,3 @@ export class AuthProvider {
 	}
 
 }
-/* Removed per Tutorial
-@Injectable()
-export class AuthProvider {
-
-  constructor(public http: Http) {
-    console.log('Hello AuthProvider Provider');
-  }
-
-}
-*/
