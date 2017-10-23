@@ -11,7 +11,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { ProfilePage } from '../pages/profile/profile';
 
 import { AuthProvider } from '../providers/auth/auth';
 import { ProfileProvider } from '../providers/profile/profile';
@@ -24,8 +23,7 @@ import { FIREBASE_CREDENTIALS } from './credentials';
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
-    ProfilePage
+    ListPage
   ],
   imports: [
     BrowserModule,
@@ -38,8 +36,7 @@ import { FIREBASE_CREDENTIALS } from './credentials';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
-    ProfilePage
+    ListPage
   ],
   providers: [
     StatusBar,

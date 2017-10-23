@@ -40,4 +40,8 @@ export class HomePage {
   goToList(): void {
     this.navCtrl.push("CharacterListPage");
   }
+
+  goToLanding(): void {
+    this.navCtrl.push("LandingPage");
+  }
 }

@@ -9,17 +9,13 @@ page-profile {
   }
 
   ion-list-header {
-    background-color: #ececec;
+   // background-color: #ececec;
     margin: 0;
     padding: 0;
   }
 
   ion-item {
     padding: 0 !important;
-  }
-
-  ion-datetime {
-    padding-left: 3px !important;
   }
 
   .item-inner {
@@ -29,7 +25,7 @@ page-profile {
 
   .popover-content {
     min-height: 0 !important;
-    max-height: 88px !important;
+    // max-height: 88px !important;
   }
 
   .profile-popover {
@@ -37,12 +33,12 @@ page-profile {
   }
 
   .placeholder-profile {
-    color: #cccccc;
+//    color: #cccccc;
   }
 
   .dob-label {
     color: #000000 !important;
     padding: 10px !important;
-    max-width: 50% !important;
+//    max-width: 50% !important;
   }
 }

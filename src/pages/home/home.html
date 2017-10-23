@@ -15,18 +15,17 @@
 <ion-content padding>
   <h3>Welcome {{user}}</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
-<h4>Tutorial Content</h4>
   <button ion-button block color="primary" (click)="goToCreate()">
     Provide Detail about your Player Character
   </button>
 
   <button ion-button block color="primary" (click)="goToList()">
     See all characters
+  </button>
+
+  <button ion-button block color="primary" (click)="goToLanding()">
+    View Landing Page
   </button>
 
   <ion-item *ngFor="let item of items | async">

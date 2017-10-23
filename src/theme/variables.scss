@@ -81,6 +81,10 @@ $colors: (
 @import "ionic.theme.default";
 
 
+$toolbar-background: #444;
+$toolbar-text-color: #333333;
+
+
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
@@ -92,5 +96,26 @@ $colors: (
 // Fonts
 // --------------------------------------------------
 
-@import "roboto";
-@import "noto-sans";
+// @import "roboto";
+// @import "noto-sans";
+
+// Google Fonts
+@import url('https://fonts.googleapis.com/css?family=Lora');
+
+// Font Variables
+$Lora: 'Lora', serif;
+
+// Styles
+body {
+  font-family: $Lora;
+  font-weight: normal;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: $Lora;
+  font-weight: normal;
+}
+
+.button {
+  font-family: $Lora;
+  font-weight: bold;
+}

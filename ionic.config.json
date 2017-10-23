@@ -1,6 +1,6 @@
 {
   "name": "GothicStoryAssistant",
-  "app_id": "3f37c88c",
+  "app_id": "f6ef8fd6",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
