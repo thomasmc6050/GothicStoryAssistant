@@ -9,12 +9,6 @@ import {
 import { ProfileProvider } from '../../providers/profile/profile';
 import { AuthProvider } from '../../providers/auth/auth';
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -23,7 +17,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class ProfilePage {
   public userProfile: any;
-  public birthDate: string;
+  public activeCharacter: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -36,8 +30,11 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage ');
     this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
       this.userProfile = userProfileSnapshot.val();
-      this.birthDate = userProfileSnapshot.val().birthDate;
-    });    
+    });
+    this.profileProvider.getActiveCharacter().on('value', ActiveCharacterSnapshot  => {
+      this.activeCharacter = ActiveCharacterSnapshot.val();
+    });
+
   }
 
   logOut(): void {
@@ -74,10 +71,6 @@ export class ProfilePage {
     alert.present();
   }
 
-  updateDOB(birthDate: string): void {
-    this.profileProvider.updateDOB(birthDate);
-  }
-
   updateEmail(): void {
     let alert: Alert = this.alertCtrl.create({
       inputs: [
@@ -96,8 +89,6 @@ export class ProfilePage {
         {
           text: 'Save',
           handler: data => {
-            let newEmail = data.newEmail;
-
             this.profileProvider
               .updateEmail(data.newEmail, data.password)
               .then(() => {
@@ -142,4 +133,38 @@ export class ProfilePage {
     });
     alert.present();
   }
+
+  setActiveCharacter(): void {
+    const alert: Alert = this.alertCtrl.create({
+      message: 'Your active characters name',
+      inputs: [
+        {
+          name: 'pcFirstName',
+          placeholder: 'Your first name',
+          value: this.activeCharacter.pcFirstName
+        },
+        {
+          name: 'pcMiddleName',
+          placeholder: 'Your middle name (optional)',
+          value: this.activeCharacter.pcMiddleName
+        },
+        {
+          name: 'pcLastName',
+          placeholder: 'Your last name',
+          value: this.activeCharacter.pcLastName
+        }
+      ],
+      buttons: [
+        { text: 'Cancel' },
+        {
+          text: 'Save',
+          handler: data => {
+            this.profileProvider.setActiveCharacter(data.pcFirstName, data.pcMiddleName, data.pcLastName);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
 }

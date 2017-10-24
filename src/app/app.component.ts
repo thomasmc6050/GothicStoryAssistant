@@ -9,6 +9,7 @@ import { ProfilePage } from '../pages/profile/profile';
 
 import firebase from 'firebase';
 
+
 import { FIREBASE_CREDENTIALS } from './credentials';
 
 @Component({
@@ -22,10 +23,10 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   constructor(
-      public platform: Platform, 
-      public statusBar: StatusBar, 
+      public platform: Platform,
+      public statusBar: StatusBar,
       public splashScreen: SplashScreen
-    ) {    
+    ) {
     firebase.initializeApp(FIREBASE_CREDENTIALS);
 
   const unsubscribe = firebase.auth().onAuthStateChanged(user => {

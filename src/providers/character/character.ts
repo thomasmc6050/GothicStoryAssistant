@@ -1,41 +1,92 @@
-import { Injectable } from '@angular/core';
-import firebase from 'firebase';
+import { NavController } from 'ionic-angular';
+import { Injectable, ViewChild } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import {
+  AngularFireDatabase,
+  AngularFireObject,
+  AngularFireList
+} from 'angularfire2/database';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class CharacterProvider {
   public characterListRef: firebase.database.Reference;
-
-  constructor() {
-    firebase.auth().onAuthStateChanged(user => {
+  public characterList: AngularFireList<any>;
+  public activeCharacter: AngularFireList<any>;
+  public userId: string;
+  constructor(
+    public afAuth: AngularFireAuth,
+    public afDatabase: AngularFireDatabase,
+    public navCtrl: NavController
+  ) {
+/*    firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.characterListRef = firebase
           .database()
           .ref(`/userProfile/${user.uid}/characterList`);
       }
     });
+*/
+    this.afAuth.authState.subscribe(user => {
+      this.userId = user.uid;
+      this.activeCharacter = this.afDatabase.list('/userProfile/${user.uid}/activeCharacter');
+    });
   }
 
-  getCharacterList(): firebase.database.Reference {
-    return this.characterListRef;
+  getCharacterList(): AngularFireList<any> {
+    return this.characterList;
   }
 
-  getCharacterSummary(characterId: string): firebase.database.Reference {
-    return this.characterListRef.child(characterId);
+  getCharacter(characterId: string): AngularFireObject<any> {
+    return this.afDatabase.object(`/characterList/${characterId}`);
+    //.characterList.child(characterId);
   }
+
+
+  getMyCharacter(myCharacterId: string): AngularFireObject<any> {
+    return this.afDatabase.object(`/characterList/${myCharacterId}`);
+    //.update(characterId, {isActive: false});
+    // log this
+  }
+
 
   createCharacter(
-    characterName: string,
-    characterDate: string,
-    characterPrice: number,
-    characterCost: number
-  ): firebase.database.ThenableReference {
-    return this.characterListRef.push({
-      name: characterName,
-      date: characterDate,
-      price: characterPrice * 1,
-      cost: characterCost * 1,
-      revenue: characterCost * -1
+    firstName: string,
+    middleName: string = null,
+    lastName: string,
+    characterType: string,
+    playerName: string = null,
+    playerId: string = null,
+    enteredPlayOnDate: string = null,
+    isActive: boolean = true
+  ): Promise<any> {
+    const newCharacterRef: firebase.database.ThenableReference = this.characterList.push({});
+    return newCharacterRef.set({
+      firstName,
+      middleName,
+      lastName,
+      characterType,
+      playerName,
+      playerId,
+      enteredPlayOnDate,
+      isActive,
+      characterId: newCharacterRef.key
     });
+    // log this
+  }
+
+  retireCharacter(characterId: string): Promise<any> {
+
+    // Validate user is Admin or Player
+
+    return this.characterList.update(characterId, {isActive: false})
+    .then( retiredCharacter => {
+
+        this.navCtrl.pop();
+        console.log('Character Retired');
+    });
+
+    // log this to characterAudit
   }
 
   addGuest(

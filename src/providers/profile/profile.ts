@@ -11,14 +11,17 @@ import firebase from 'firebase';
 */
 @Injectable()
 export class ProfileProvider {
-  public userProfile: firebase.database.Reference;
   public currentUser: firebase.User;
+  public userProfile: firebase.database.Reference;
+  public activeCharacter: firebase.database.Reference;
 
   constructor() {
+
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.currentUser = user;
         this.userProfile = firebase.database().ref(`/userProfile/${user.uid}`);
+        this.activeCharacter = this.userProfile.child('activeCharacterId');
       }
     });
   }
@@ -27,12 +30,16 @@ export class ProfileProvider {
     return this.userProfile;
   }
 
-  updateName(firstName: string, lastName: string): Promise<any> {
-    return this.userProfile.update({ firstName, lastName });
+  updateActiveCharacterId(activeCharacterId: string): Promise<any> {
+    return this.userProfile.update(activeCharacterId);
   }
 
-  updateDOB(birthDate: string): Promise<any> {
-    return this.userProfile.update({ birthDate });
+  getActiveCharacter(): firebase.database.Reference {
+    return this.userProfile.child('activeCharacterId');
+  }
+
+  updateName(firstName: string, lastName: string): Promise<any> {
+    return this.userProfile.update({ firstName, lastName });
   }
 
   updateEmail(newEmail: string, password: string): Promise<any> {

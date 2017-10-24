@@ -67,6 +67,28 @@
         </ion-row>
       </ion-grid>
     </ion-item>
-  </ion-list>
+</ion-list>
+<div class="spacer" style="width: 100%; height: 5%;"></div>
+<ion-list>
+  <ion-list-header> Application Settings </ion-list-header>
+  <ion-item (click)="setActiveCharacter()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          Active Character
+        </ion-col>
+        <ion-col text-right *ngIf="userProfile?.activeCharacter">
+          {{userProfile?.activeCharacter}}
+        </ion-col>
+<!--        <ion-col class="placeholder-profile"  *ngIf="!userProfile?.activeCharacter">
+          <span>
+            Tap here to select.
+          </span>
+        </ion-col>
+-->
+      </ion-row>
+    </ion-grid>
+  </ion-item>
 
+</ion-list>
 </ion-content>
