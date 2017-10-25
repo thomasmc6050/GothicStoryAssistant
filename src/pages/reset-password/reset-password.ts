@@ -36,7 +36,7 @@ export class ResetPasswordPage {
         "",
         Validators.compose([Validators.required, EmailValidator.isValid])
       ]
-    });  	
+    });
   }
 
   resetPassword(): void {
@@ -72,7 +72,7 @@ export class ResetPasswordPage {
       );
     }
   }
-  
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ResetPasswordPage');
   }

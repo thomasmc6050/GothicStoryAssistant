@@ -4,32 +4,56 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-item>
-    <ion-label stacked>Character Name</ion-label>
-    <ion-input [(ngModel)]="characterName" type="text" placeholder="What's your character's name?">
-    </ion-input>
-  </ion-item>
 
-  <ion-item>
-    <ion-label stacked>Price</ion-label>
-    <ion-input [(ngModel)]="characterPrice" type="number" placeholder="How much will guests pay?">
-    </ion-input>
-  </ion-item>
+  <ion-content padding>
+    <form [formGroup]="newCharacterForm" (submit)="createCharacter()" novalidate>
 
-  <ion-item>
-    <ion-label stacked>Cost</ion-label>
-    <ion-input [(ngModel)]="characterCost" type="number" placeholder="How much are you spending?">
-    </ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label stacked>First Name</ion-label>
+        <ion-input formControlName="firstName" type="text">
+        </ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label>Character Date</ion-label>
-    <ion-datetime displayFormat="D MMM, YY" pickerFormat="DD MMM YYYY" [(ngModel)]="characterDate">
-    </ion-datetime>
-  </ion-item>
+      <ion-item>
+        <ion-label stacked>Middle Name (optional</ion-label>
+        <ion-input formControlName="middleName" type="text">
+        </ion-input>
+      </ion-item>
 
-  <button ion-button block (click)="createCharacter(characterName, characterDate, characterPrice, characterCost)">
+      <ion-item>
+        <ion-label stacked>Last Name</ion-label>
+        <ion-input formControlName="lastName" type="text">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Character Type</ion-label>
+        <ion-select formControlName="characterType" type="text" >
+            <ion-option>Player</ion-option>
+            <ion-option>Non-Player</ion-option>
+            <ion-option>Unknown</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+          <ion-label stacked>On my honor, I attest this is my active character.</ion-label>
+          <ion-checkbox formControlName="attestationDate" type="date">
+          </ion-checkbox>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>Character Creation Date</ion-label>
+        <ion-datetime ng-model="FromDate" displayFormat="MMM, YY" pickerFormat="MMM YYYY" formControlName="enteredPlayOnDate" max="2020-10-31" >
+        </ion-datetime>
+      </ion-item>
+
+      <button ion-button block type="submit">
+        Submit
+      </button>
+    </form>
+
+    <button ion-button block type="submit">
     Create Character
   </button>
 </ion-content>

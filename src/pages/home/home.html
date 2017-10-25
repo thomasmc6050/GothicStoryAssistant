@@ -8,12 +8,12 @@
       <button ion-button icon-only (click)="goToProfile()">
         <ion-icon name="person"></ion-icon>
         </button>
-    </ion-buttons>    
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Welcome {{user}}</h3>
+  <h3>Welcome {{displayName}}</h3>
 
 
   <button ion-button block color="primary" (click)="goToCreate()">
@@ -30,6 +30,6 @@
 
   <ion-item *ngFor="let item of items | async">
     {{item | json}}
-  </ion-item>  
+  </ion-item>
 
 </ion-content>

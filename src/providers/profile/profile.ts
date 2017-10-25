@@ -1,5 +1,10 @@
-import { Injectable } from '@angular/core';
-import firebase from 'firebase';
+import { Injectable, ViewChild } from '@angular/core';
+import firebase from 'firebase/app';
+import {
+  AngularFireDatabase,
+  AngularFireObject,
+  AngularFireList
+} from 'angularfire2/database';
 //import { Http } from '@angular/http';
 //import 'rxjs/add/operator/map';
 
@@ -12,21 +17,21 @@ import firebase from 'firebase';
 @Injectable()
 export class ProfileProvider {
   public currentUser: firebase.User;
-  public userProfile: firebase.database.Reference;
-  public activeCharacter: firebase.database.Reference;
-
+  public userProfile: AngularFireObject<any>;
+  public af: AngularFireDatabase;
   constructor() {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.currentUser = user;
-        this.userProfile = firebase.database().ref(`/userProfile/${user.uid}`);
-        this.activeCharacter = this.userProfile.child('activeCharacterId');
+        this.userProfile = this.af.object('/userProfile/${user.uid}');
+        // firebase.database().ref(`/userProfile/${user.uid}`);
+//        this.activeCharacter = this.userProfile.child('activeCharacterId');
       }
     });
   }
 
-  getUserProfile(): firebase.database.Reference {
+  getUserProfile(): AngularFireObject<void> {
     return this.userProfile;
   }
 
@@ -34,8 +39,8 @@ export class ProfileProvider {
     return this.userProfile.update(activeCharacterId);
   }
 
-  getActiveCharacter(): firebase.database.Reference {
-    return this.userProfile.child('activeCharacterId');
+  getActiveCharacter(): string {
+    return this.userProfile;
   }
 
   updateName(firstName: string, lastName: string): Promise<any> {

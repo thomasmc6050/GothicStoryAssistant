@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { Component, ViewChild } from '@angular/core';
 import {
   Alert,
   AlertController,
@@ -8,6 +9,7 @@ import {
 } from 'ionic-angular';
 import { ProfileProvider } from '../../providers/profile/profile';
 import { AuthProvider } from '../../providers/auth/auth';
+import { CharacterProvider } from '../../providers/character/character';
 
 
 @IonicPage()
@@ -16,8 +18,8 @@ import { AuthProvider } from '../../providers/auth/auth';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-  public userProfile: any;
-  public activeCharacter: any;
+  public userProfile: AngularFireObject<any>;
+//  public activeCharacter: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -28,13 +30,18 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage ');
+
+
+
     this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
       this.userProfile = userProfileSnapshot.val();
     });
+
+/*
     this.profileProvider.getActiveCharacter().on('value', ActiveCharacterSnapshot  => {
       this.activeCharacter = ActiveCharacterSnapshot.val();
     });
-
+*/
   }
 
   logOut(): void {
@@ -42,6 +49,7 @@ export class ProfilePage {
       this.navCtrl.setRoot('LoginPage');
     });
   }
+
 
   updateName(): void {
     const alert: Alert = this.alertCtrl.create({
@@ -127,39 +135,6 @@ export class ProfilePage {
               data.newPassword,
               data.oldPassword
             );
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-
-  setActiveCharacter(): void {
-    const alert: Alert = this.alertCtrl.create({
-      message: 'Your active characters name',
-      inputs: [
-        {
-          name: 'pcFirstName',
-          placeholder: 'Your first name',
-          value: this.activeCharacter.pcFirstName
-        },
-        {
-          name: 'pcMiddleName',
-          placeholder: 'Your middle name (optional)',
-          value: this.activeCharacter.pcMiddleName
-        },
-        {
-          name: 'pcLastName',
-          placeholder: 'Your last name',
-          value: this.activeCharacter.pcLastName
-        }
-      ],
-      buttons: [
-        { text: 'Cancel' },
-        {
-          text: 'Save',
-          handler: data => {
-            this.profileProvider.setActiveCharacter(data.pcFirstName, data.pcMiddleName, data.pcLastName);
           }
         }
       ]
