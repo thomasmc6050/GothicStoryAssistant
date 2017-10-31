@@ -37,7 +37,7 @@ export class CharacterCreatePage {
     playerName: string = this.profileProvider.currentUser.displayName,
     playerId: string = this.profileProvider.currentUser.uid,
     enteredPlayOnDate: string = null,
-    isActive: boolean = true
+    characterStatus: string = 'Active'
   ): void {
     this.characterProvider
       .createCharacter(
@@ -48,7 +48,7 @@ export class CharacterCreatePage {
         playerName,
         playerId,
         enteredPlayOnDate,
-        isActive
+        characterStatus
       )
       .then(newCharacter => {
         this.navCtrl.pop();

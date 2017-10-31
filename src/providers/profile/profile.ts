@@ -17,29 +17,30 @@ import {
 @Injectable()
 export class ProfileProvider {
   public currentUser: firebase.User;
-  public userProfile: AngularFireObject<any>;
+  public userProfile: firebase.database.Reference;
   public af: AngularFireDatabase;
-  constructor() {
 
+  constructor() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.currentUser = user;
-        this.userProfile = this.af.object('/userProfile/${user.uid}');
-        // firebase.database().ref(`/userProfile/${user.uid}`);
+        this.userProfile = firebase.database().ref(`/userProfile/${user.uid}`);
+//        this.userProfile = this.userProfile = this.af.object('/userProfile/${user.uid}');
 //        this.activeCharacter = this.userProfile.child('activeCharacterId');
       }
     });
   }
 
-  getUserProfile(): AngularFireObject<void> {
-    return this.userProfile;
-  }
 
   updateActiveCharacterId(activeCharacterId: string): Promise<any> {
     return this.userProfile.update(activeCharacterId);
   }
 
-  getActiveCharacter(): string {
+
+
+// No edits below
+
+  getUserProfile(): firebase.database.Reference {
     return this.userProfile;
   }
 

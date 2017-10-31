@@ -18,8 +18,9 @@ import { CharacterProvider } from '../../providers/character/character';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-  public userProfile: AngularFireObject<any>;
-//  public activeCharacter: any;
+  public userProfile: any;
+  public activeCharacterId: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -30,18 +31,10 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage ');
-
-
-
     this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
       this.userProfile = userProfileSnapshot.val();
+      this.activeCharacterId = userProfileSnapshot.val().activeCharaterId;
     });
-
-/*
-    this.profileProvider.getActiveCharacter().on('value', ActiveCharacterSnapshot  => {
-      this.activeCharacter = ActiveCharacterSnapshot.val();
-    });
-*/
   }
 
   logOut(): void {

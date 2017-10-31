@@ -18,11 +18,11 @@ export class HomePage {
     ) {
         afAuth.authState.subscribe(user => {
           if (!user) {
-            this.displayName = null;        
+            this.displayName = null;
             return;
           }
-          this.displayName = user.displayName;      
-        });    
+          this.displayName = user.displayName;
+        });
     //this.items = db.list('cuisine').valueChanges();
   }
 
@@ -38,10 +38,7 @@ export class HomePage {
   }
 
   goToList(): void {
-    this.navCtrl.push("CharacterListPage");
+    this.navCtrl.push("CharactersPage");
   }
 
-  goToLanding(): void {
-    this.navCtrl.push("LandingPage");
-  }
 }

@@ -11,6 +11,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { ProfilePageModule } from '../pages/profile/profile.module';
 
 import { AuthProvider } from '../providers/auth/auth';
 import { ProfileProvider } from '../providers/profile/profile';
@@ -30,7 +31,8 @@ import { FIREBASE_CREDENTIALS } from './credentials';
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ProfilePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

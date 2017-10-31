@@ -1,52 +1,40 @@
 <ion-header>
   <ion-navbar>
-    <ion-title></ion-title>
+    <ion-title>
+      {{ (character | async)?.fullName }}
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-row padding>
-    <ion-col col-8>
-      Current Revenue
-    </ion-col>
-    <ion-col col-4 [class.profitable]="currentCharacter?.revenue > 0" [class.no-profit]="currentCharacter?.revenue < 0">
-      ${{currentCharacter?.revenue}}
-    </ion-col>
-  </ion-row>
-  <ion-card>
+<ion-content padding>
+<h3>
+  {{ (character | async)?.fullName }}
+</h3>
+<ion-card>
+  <ion-card-header>
+    Basic Attributes
+  </ion-card-header>
+</ion-card>
+
+  <!--  <ion-card>
     <ion-card-header>
-      {{currentCharacter?.name}}
+      {{character?.fullname}}
     </ion-card-header>
     <ion-card-content>
       <p>Ticket: <strong>${{currentCharacter?.price}}</strong></p>
       <p>Date: <strong>{{currentCharacter?.date}}</strong></p>
     </ion-card-content>
   </ion-card>
+-->
+<ion-list>
+  <ion-item> {{ (character | async)?.firstName }} </ion-item>
+  <ion-item> {{ (character | async)?.middleName }} </ion-item>
+  <ion-item> {{ (character | async)?.lastName }} </ion-item>
+  <ion-item> {{ (character | async)?.characterType }} </ion-item>
 
-  <ion-card class="add-guest-form">
-    <ion-card-header>
-      Add Guests
-    </ion-card-header>
-    <ion-card-content>
-      <ion-row>
-        <ion-col col-8>
-          <ion-item>
-            <ion-label stacked>Name</ion-label>
-            <ion-input [(ngModel)]="guestName" type="text" placeholder="What's your guest's name?"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col col-4>
-          <button ion-button icon-only (click)="takePicture()">
-            <ion-icon name="camera"></ion-icon>
-          </button>
-        </ion-col>
-      </ion-row>
-      <span *ngIf="guestPicture">Picture taken!</span>
+  <ion-item> {{ (character | async)?.characterType }} </ion-item>
 
-      <button ion-button color="primary" block (click)="addGuest(guestName)" [disabled]="!guestName">
-        Add Guest
-      </button>
-    </ion-card-content>
-  </ion-card>
+  <ion-item> {{ (character | async)?.enteredPlayOnDate }} </ion-item>
 
+</ion-list>
 </ion-content>

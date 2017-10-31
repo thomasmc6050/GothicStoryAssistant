@@ -7,10 +7,11 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { ProfilePage } from '../pages/profile/profile';
 
-import firebase from 'firebase';
+//import firebase from 'firebase';
+import { AngularFireAuth } from 'angularfire2/auth';
 
+//import { FIREBASE_CREDENTIALS } from './credentials';
 
-import { FIREBASE_CREDENTIALS } from './credentials';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,8 +26,20 @@ export class MyApp {
   constructor(
       public platform: Platform,
       public statusBar: StatusBar,
-      public splashScreen: SplashScreen
+      public splashScreen: SplashScreen,
+      afAuth: AngularFireAuth
     ) {
+
+      const authListener = afAuth.authState.subscribe(user => {
+        if (user) {
+          this.rootPage = HomePage;
+          authListener.unsubscribe();
+        } else {
+          this.rootPage = 'LoginPage';
+          authListener.unsubscribe();
+        }
+      });
+/*
     firebase.initializeApp(FIREBASE_CREDENTIALS);
 
   const unsubscribe = firebase.auth().onAuthStateChanged(user => {
@@ -38,8 +51,8 @@ export class MyApp {
       unsubscribe();
     }
   });
-
-    this.initializeApp();
+*/
+//    this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [

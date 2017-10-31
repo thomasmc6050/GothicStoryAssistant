@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { CharacterProvider } from '../../providers/character/character';
@@ -7,8 +8,8 @@ import { CharacterProvider } from '../../providers/character/character';
   selector: 'page-character-list',
   templateUrl: 'character-list.html'
 })
-export class CharacterListPage {
-  public characterList: Array<any>;
+export class CharactersPage {
+  public characters: Observable<any>;
 
   constructor(
     public navCtrl: NavController,
@@ -16,21 +17,16 @@ export class CharacterListPage {
   ) {}
 
   ionViewDidLoad() {
-    this.characterProvider.getCharacterList().on('value', characterListSnapshot => {
-      this.characterList = [];
-      characterListSnapshot.forEach(snap => {
-        this.characterList.push({
-          id: snap.key,
-          name: snap.val().name,
-          price: snap.val().price,
-          date: snap.val().date
-        });
-        return false;
-      });
-    });
+    this.characters =
+      this.characterProvider.getCharacters().valueChanges();
   }
 
-  goToCharacterSummary(characterId): void {
+  createCharacter(): void {
+    this.navCtrl.push('CharacterCreatePage');
+    }
+
+  goToCharacterSummary(characterId:string): void {
     this.navCtrl.push('CharacterSummaryPage', { characterId: characterId });
   }
+
 }
