@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController } from "ionic-angular";
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { ProfileProvider } from './../../providers/profile/profile';
 import { CharacterProvider } from "../../providers/character/character";
 
 @IonicPage()
@@ -10,48 +9,45 @@ import { CharacterProvider } from "../../providers/character/character";
   templateUrl: "character-create.html"
 })
 export class CharacterCreatePage {
-  public newCharacterForm : FormGroup
+  public newCharacterForm: FormGroup;
 
   constructor(
     public navCtrl: NavController,
     public characterProvider: CharacterProvider,
-    private formBuilder: FormBuilder,
-    private profileProvider: ProfileProvider
+    private formBuilder: FormBuilder
   ) {
     this.newCharacterForm = this.formBuilder.group({
-//      title: ['', Validators.required],
-//      description: [''],
+      firstName: ['', Validators.required],
+      middleName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      characterType: ['', Validators.required],
+      enteredPlayOnDate: ['', Validators.required]
     });
   }
 
-  logForm(){
-    console.log(this.newCharacterForm.value)
+  logForm() {
+    console.log(this.newCharacterForm.value);
   }
 
-  createCharacter(
-    firstName: string,
-    middleName: string = null,
-    lastName: string,
-    characterType: string,
-    attestationDate: string = null,
-    playerName: string = this.profileProvider.currentUser.displayName,
-    playerId: string = this.profileProvider.currentUser.uid,
-    enteredPlayOnDate: string = null,
-    characterStatus: string = 'Active'
-  ): void {
-    this.characterProvider
-      .createCharacter(
-        firstName,
-        middleName,
-        lastName,
-        characterType,
-        playerName,
-        playerId,
-        enteredPlayOnDate,
-        characterStatus
-      )
-      .then(newCharacter => {
-        this.navCtrl.pop();
-      });
-  }
+  createCharacter() {
+    if (!this.newCharacterForm.valid) {
+      this.logForm();
+    } else {
+      this.characterProvider
+        .createCharacter(
+          this.newCharacterForm.value.firstName,
+          this.newCharacterForm.value.middleName,
+          this.newCharacterForm.value.lastName,
+          this.newCharacterForm.value.characterType,
+          this.newCharacterForm.value.enteredPlayOnDate
+        )
+        .then(
+          () => {
+            this.navCtrl.pop();
+          },
+          error => {
+            console.error(error);
+          }
+        );
+}}
 }

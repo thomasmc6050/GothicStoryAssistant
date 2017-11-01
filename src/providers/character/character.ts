@@ -1,6 +1,6 @@
-import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
+//import { Observable } from 'rxjs/Observable';
 import { NavController } from 'ionic-angular';
-//import { NavParams } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 
 import {
@@ -13,34 +13,45 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class CharacterProvider {
-  public charactersRef: firebase.database.Reference;
+  //  public charactersRef: firebase.database.Reference;
   public characters: AngularFireList<any>;
   public activeCharacter: AngularFireList<any>;
   public navCtrl: NavController;
+  public userId: string;
+//  public userName: string;
+//  public profileRef: firebase.database.Reference;
   constructor(
-    public afDatabase: AngularFireDatabase
-
+    public afDatabase: AngularFireDatabase,
+    public afAuth: AngularFireAuth
   ) {
-/*    firebase.auth().onAuthStateChanged(user => {
+    afAuth.authState.subscribe(user => {
       if (user) {
-        this.charactersRef = firebase
+        this.userId = user.uid;
+        /*
+        this.characters = this.afDatabase.list("characters", ref =>
+          ref.orderByChild("lastName" + "firstName" + "middleName")
+        );
+        this.profileRef = firebase
           .database()
-          .ref(`/userProfile/${user.uid}/characters`);
+          .ref(`/userProfile/${user.uid}`);
+        this.userName = this.profileRef.child('firstName').toString;
+        */
       }
     });
-*/
+
+    //this.afDatabase.database().ref('\userProfile\${user.uid}')
   }
 
-  ionViewDidEnter(){
-    this.characters = this.afDatabase.list(
-      'characters', ref => ref.orderByChild('lastName'+'firstName'+'middleName')
+  ionViewDidEnter() {
+    this.characters = this.afDatabase.list("characters", ref =>
+      ref.orderByChild("lastName" + "firstName" + "middleName")
     );
   }
 
   getCharacters(): AngularFireList<any> {
-    return this.characters = this.afDatabase.list(
-      'characters', ref => ref.orderByChild('lastName'+'firstName'+'middleName')
-    );
+    return (this.characters = this.afDatabase.list("characters", ref =>
+      ref.orderByChild("lastName" + "firstName" + "middleName")
+    ));
     //this.characters;
   }
 
@@ -49,54 +60,55 @@ export class CharacterProvider {
     //.characters.child(characterId);
   }
 
-
   getMyCharacter(myCharacterId: string): AngularFireObject<any> {
     return this.afDatabase.object(`/characters/${myCharacterId}`);
     //.update(characterId, {isActive: false});
     // log this
   }
-
-
+  /*
+          this.newCharacterForm.value.firstName,
+          this.newCharacterForm.value.middleName,
+          this.newCharacterForm.value.lastName,
+          this.newCharacterForm.value.characterType,
+          this.newCharacterForm.value.enteredPlayOnDate
+*/
   createCharacter(
     firstName: string,
     middleName: string = null,
     lastName: string,
-    fullName: string = firstName+" "+middleName+" "+lastName,
     characterType: string,
-    playerName: string = null,
-    playerId: string = null,
-    enteredPlayOnDate: string = null,
-    characterStatus: string = 'Active',
-    characterPicture: string = null
+    enteredPlayOnDate: string = null
   ): Promise<any> {
-    const newCharacterRef: firebase.database.ThenableReference = this.characters.push({});
+    const newCharacterRef: firebase.database.ThenableReference = this.characters.push(
+      {}
+    );
+    console.log(firstName, middleName, lastName, characterType, enteredPlayOnDate);
     return newCharacterRef.set({
       firstName,
       middleName,
       lastName,
-      fullName,
+      characterName: firstName + " " + lastName,
       characterType,
-      playerName,
-      playerId,
       enteredPlayOnDate,
-      characterStatus,
-      characterPicture,
+      playerId: this.userId,
+      playerName: null,
+      characterStatus: "Active",
       characterId: newCharacterRef.key
     });
   }
 
-    // log this
+  // log this
 
   retireCharacter(characterId: string, characterStatus: string): Promise<any> {
-
     // Validate user is Admin or Player
     // Works for both retired and temporarily shelved characters
 
-    return this.characters.update(characterId, characterStatus)
-    .then( retiredCharacter => {
+    return this.characters
+      .update(characterId, characterStatus)
+      .then(retiredCharacter => {
         this.navCtrl.pop();
-        console.log('Character '+characterStatus+', Id: '+characterId);
-    });
+        console.log("Character " + characterStatus + ", Id: " + characterId);
+      });
 
     // log this to characterAudit
   }

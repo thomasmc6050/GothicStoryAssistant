@@ -9,25 +9,25 @@
     <form [formGroup]="newCharacterForm" (submit)="createCharacter()" novalidate>
 
       <ion-item>
-        <ion-label stacked>First Name</ion-label>
+        <ion-label floating>First Name</ion-label>
         <ion-input formControlName="firstName" type="text">
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>Middle Name (optional</ion-label>
+        <ion-label floating>Middle Name (optional)</ion-label>
         <ion-input formControlName="middleName" type="text">
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>Last Name</ion-label>
+        <ion-label floating>Last Name</ion-label>
         <ion-input formControlName="lastName" type="text">
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>Character Type</ion-label>
+        <ion-label floating>Character Type</ion-label>
         <ion-select formControlName="characterType" type="text" >
             <ion-option>Player</ion-option>
             <ion-option>Non-Player</ion-option>
@@ -36,17 +36,13 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>Character Creation Date</ion-label>
-        <ion-datetime displayFormat="MMM, YY" pickerFormat="MMM YYYY" formControlName="enteredPlayOnDate" max="2020-10-31" >
+        <ion-label>Created</ion-label>
+        <ion-datetime displayFormat="MMM, YY" pickerFormat="MMM YYYY" formControlName="enteredPlayOnDate" max="2030-10-31" >
         </ion-datetime>
       </ion-item>
 
       <button ion-button block type="submit">
-        Submit
+        Create
       </button>
     </form>
-
-    <button ion-button block type="submit">
-    Create Character
-  </button>
 </ion-content>

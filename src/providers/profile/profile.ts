@@ -18,7 +18,7 @@ import {
 export class ProfileProvider {
   public currentUser: firebase.User;
   public userProfile: firebase.database.Reference;
-  public af: AngularFireDatabase;
+  private af: AngularFireDatabase;
 
   constructor() {
     firebase.auth().onAuthStateChanged(user => {
