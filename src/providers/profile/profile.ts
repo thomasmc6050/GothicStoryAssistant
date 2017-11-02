@@ -1,10 +1,12 @@
-import { Injectable, ViewChild } from '@angular/core';
+import { Injectable
+//       , ViewChild
+      } from '@angular/core';
 import firebase from 'firebase/app';
-import {
-  AngularFireDatabase,
-  AngularFireObject,
-  AngularFireList
-} from 'angularfire2/database';
+//import {
+//  AngularFireDatabase,
+//  AngularFireObject,
+//  AngularFireList
+//} from 'angularfire2/database';
 //import { Http } from '@angular/http';
 //import 'rxjs/add/operator/map';
 
@@ -18,7 +20,7 @@ import {
 export class ProfileProvider {
   public currentUser: firebase.User;
   public userProfile: firebase.database.Reference;
-  private af: AngularFireDatabase;
+//  private af: AngularFireDatabase;
 
   constructor() {
     firebase.auth().onAuthStateChanged(user => {

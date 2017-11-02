@@ -16,7 +16,7 @@ export class CharacterProvider {
   //  public charactersRef: firebase.database.Reference;
   public characters: AngularFireList<any>;
   public activeCharacter: AngularFireList<any>;
-  public navCtrl: NavController;
+  private navCtrl: NavController;
   public userId: string;
 //  public userName: string;
 //  public profileRef: firebase.database.Reference;

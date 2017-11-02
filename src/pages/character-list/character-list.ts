@@ -26,6 +26,7 @@ export class CharactersPage {
     }
 
   goToCharacterSummary(characterId:string): void {
+    console.log(characterId);
     this.navCtrl.push('CharacterSummaryPage', { characterId: characterId });
   }
 

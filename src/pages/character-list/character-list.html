@@ -12,10 +12,10 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let character of characters | async" (click)="goToCharacterSummary(character.Id)">
+    <ion-item *ngFor="let character of (characters | async)" (click)="goToCharacterSummary(character.characterId)">
       <ion-grid>
         <ion-row>
-            <h2>{{character?.fullName}}</h2>
+            <h2>{{character?.characterName}}</h2>
         </ion-row>
       </ion-grid>
     </ion-item>

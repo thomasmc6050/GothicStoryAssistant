@@ -1,5 +1,7 @@
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
-import { Component, ViewChild } from '@angular/core';
+//import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { Component
+//       , ViewChild
+       } from '@angular/core';
 import {
   Alert,
   AlertController,
@@ -9,7 +11,7 @@ import {
 } from 'ionic-angular';
 import { ProfileProvider } from '../../providers/profile/profile';
 import { AuthProvider } from '../../providers/auth/auth';
-import { CharacterProvider } from '../../providers/character/character';
+//import { CharacterProvider } from '../../providers/character/character';
 
 
 @IonicPage()

@@ -1,14 +1,14 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{ (character | async)?.fullName }}
+      {{ (character | async)?.characterName }}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 <h3>
-  {{ (character | async)?.fullName }}
+  {{ (character | async)?.characterName }}
 </h3>
 <ion-card>
   <ion-card-header>
@@ -31,9 +31,6 @@
   <ion-item> {{ (character | async)?.middleName }} </ion-item>
   <ion-item> {{ (character | async)?.lastName }} </ion-item>
   <ion-item> {{ (character | async)?.characterType }} </ion-item>
-
-  <ion-item> {{ (character | async)?.characterType }} </ion-item>
-
   <ion-item> {{ (character | async)?.enteredPlayOnDate }} </ion-item>
 
 </ion-list>
