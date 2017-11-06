@@ -9,7 +9,7 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { HomePage } from "./../pages/home/home";
 import { ListPage } from '../pages/list/list';
 import { ProfilePageModule } from '../pages/profile/profile.module';
 
@@ -19,6 +19,7 @@ import { CharacterProvider } from '../providers/character/character';
 
 import { Camera } from '@ionic-native/camera';
 import { FIREBASE_CREDENTIALS } from './credentials';
+import { DowntimeProvider } from '../providers/downtime/downtime';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { FIREBASE_CREDENTIALS } from './credentials';
     AuthProvider,
     ProfileProvider,
     CharacterProvider,
-    Camera
+    Camera,
+    DowntimeProvider
   ]
 })
 export class AppModule {}

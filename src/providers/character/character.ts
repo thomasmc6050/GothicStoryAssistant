@@ -1,5 +1,4 @@
 import { AngularFireAuth } from 'angularfire2/auth';
-//import { Observable } from 'rxjs/Observable';
 import { NavController } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 
@@ -18,50 +17,39 @@ export class CharacterProvider {
   public activeCharacter: AngularFireList<any>;
   private navCtrl: NavController;
   public userId: string;
-//  public userName: string;
-//  public profileRef: firebase.database.Reference;
+  //  public userName: string;
+  //  public profileRef: firebase.database.Reference;
   constructor(
-    public afDatabase: AngularFireDatabase,
+    public af: AngularFireDatabase,
     public afAuth: AngularFireAuth
   ) {
     afAuth.authState.subscribe(user => {
       if (user) {
         this.userId = user.uid;
-        /*
-        this.characters = this.afDatabase.list("characters", ref =>
-          ref.orderByChild("lastName" + "firstName" + "middleName")
-        );
-        this.profileRef = firebase
-          .database()
-          .ref(`/userProfile/${user.uid}`);
-        this.userName = this.profileRef.child('firstName').toString;
-        */
       }
     });
-
-    //this.afDatabase.database().ref('\userProfile\${user.uid}')
   }
 
   ionViewDidEnter() {
-    this.characters = this.afDatabase.list("characters", ref =>
+    this.characters = this.af.list("characters", ref =>
       ref.orderByChild("lastName" + "firstName" + "middleName")
     );
   }
 
   getCharacters(): AngularFireList<any> {
-    return (this.characters = this.afDatabase.list("characters", ref =>
+    return (this.characters = this.af.list("characters", ref =>
       ref.orderByChild("lastName" + "firstName" + "middleName")
     ));
     //this.characters;
   }
 
   getCharacter(characterId: string): AngularFireObject<any> {
-    return this.afDatabase.object(`/characters/${characterId}`);
+    return this.af.object(`/characters/${characterId}`);
     //.characters.child(characterId);
   }
 
   getMyCharacter(myCharacterId: string): AngularFireObject<any> {
-    return this.afDatabase.object(`/characters/${myCharacterId}`);
+    return this.af.object(`/characters/${myCharacterId}`);
     //.update(characterId, {isActive: false});
     // log this
   }
@@ -72,6 +60,7 @@ export class CharacterProvider {
           this.newCharacterForm.value.characterType,
           this.newCharacterForm.value.enteredPlayOnDate
 */
+
   createCharacter(
     firstName: string,
     middleName: string = null,
@@ -82,7 +71,7 @@ export class CharacterProvider {
     const newCharacterRef: firebase.database.ThenableReference = this.characters.push(
       {}
     );
-    console.log(firstName, middleName, lastName, characterType, enteredPlayOnDate);
+    //    console.log(firstName, middleName, lastName, characterType, enteredPlayOnDate);
     return newCharacterRef.set({
       firstName,
       middleName,

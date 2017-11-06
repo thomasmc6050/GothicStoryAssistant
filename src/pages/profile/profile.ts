@@ -21,7 +21,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class ProfilePage {
   public userProfile: any;
-  public activeCharacterId: any;
+  public activeCharacterId: string;
 
   constructor(
     public navCtrl: NavController,
@@ -33,9 +33,9 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage ');
-    this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
+    this.profileProvider.getUserRef().on('value', userProfileSnapshot => {
       this.userProfile = userProfileSnapshot.val();
-      this.activeCharacterId = userProfileSnapshot.val().activeCharaterId;
+//      this.activeCharacterId = userProfileSnapshot.val().activeCharaterId;
     });
   }
 
@@ -126,10 +126,7 @@ export class ProfilePage {
         {
           text: 'Save',
           handler: data => {
-            this.profileProvider.updatePassword(
-              data.newPassword,
-              data.oldPassword
-            );
+            this.profileProvider.updatePassword(data.newPassword, data.oldPassword);
           }
         }
       ]

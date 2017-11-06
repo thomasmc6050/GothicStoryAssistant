@@ -3,7 +3,9 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-center>Player Profile</ion-title>
+    <ion-title text-center>
+      Settings
+    </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="logOut()">
         <ion-icon name="log-out"></ion-icon>
@@ -24,8 +26,8 @@
           <ion-col>
             Name
           </ion-col>
-          <ion-col text-right *ngIf="userProfile?.firstName || userProfile?.lastName">
-            {{userProfile?.firstName}} {{userProfile?.lastName}}
+          <ion-col text-right *ngIf="userProfile?.playerName">
+            {{userProfile?.playerName}}
           </ion-col>
           <ion-col class="placeholder-profile" *ngIf="!userProfile?.firstName">
             <span>

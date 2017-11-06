@@ -15,13 +15,14 @@ export class CharacterCreatePage {
     public navCtrl: NavController,
     public characterProvider: CharacterProvider,
     private formBuilder: FormBuilder
+
   ) {
     this.newCharacterForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      middleName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      characterType: ['', Validators.required],
-      enteredPlayOnDate: ['', Validators.required]
+      firstName: ["", Validators.required],
+      middleName: ["", Validators.required],
+      lastName: ["", Validators.required],
+      characterType: ["", Validators.required],
+      enteredPlayOnDate: ["", Validators.required]
     });
   }
 
@@ -49,5 +50,6 @@ export class CharacterCreatePage {
             console.error(error);
           }
         );
-}}
+    }
+  }
 }

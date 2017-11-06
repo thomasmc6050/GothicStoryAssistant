@@ -1,67 +1,67 @@
 import { Injectable } from '@angular/core';
-
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthProvider {
   public userId: string = null;
-
-	constructor(
-    public afAuth: AngularFireAuth,
-    public afDatabase: AngularFireDatabase
-  ) {
+  public userObject: AngularFireObject<any>;
+  public userRef: firebase.database.Reference;
+  constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
     afAuth.authState.subscribe(user => {
-      if (user) {this.userId = user.uid;}
-    })
+      if (user) {
+        this.userId = user.uid;
+        this.userObject = af.object(`/userProfile/${user.uid}/`);
+      }
+    });
   }
 
   getUser(): firebase.User {
     return this.afAuth.auth.currentUser;
-    }
+  }
 
+  getUserObject(): AngularFireObject<any> {
+    return this.userObject;
+  }
 
-	loginUser(email: string, password: string): Promise<any> {
-		return this.afAuth.auth.signInWithEmailAndPassword(email, password);
-	}
+  getUserRef(): firebase.database.Reference {
+    return this.af.database.ref('/userProfile/${user.uid}');
+  }
 
-	signupUser(email: string, password: string): Promise<any> {
-		return firebase
-		.auth()
-		.createUserWithEmailAndPassword(email, password)
-		.then(newUser => {
-      this.afDatabase.object(`/userProfile/${newUser.uid}/`).set({
-        admin: false,
-        email
+  loginUser(email: string, password: string): Promise<any> {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+
+  signupUser(email: string, password: string): Promise<any> {
+    return firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(newUser => {
+        this.af.object(`/userProfile/${newUser.uid}/`).set({
+          admin: false,
+          email
         });
+      })
+      .catch(error => console.error(error));
+  }
 
-//			firebase
-//			.database()
-//			.ref(`/userProfile/${newUser.uid}/email`)
-//			.set(email);
-		})
-		.catch(error => console.error(error));
-	}
+  resetPassword(email: string): Promise<void> {
+    return this.afAuth.auth.sendPasswordResetEmail(email);
+  }
 
-	//resetPassword(email:string):firebase.Promise<void> {
-	resetPassword(email:string):Promise<void> {
-		return this.afAuth.auth.sendPasswordResetEmail(email);
-	}
-
-	//logoutUser(): firebase.Promise<void> {
-	logoutUser(): Promise<void> {
+  logoutUser(): Promise<void> {
     return this.afAuth.auth.signOut();
-	}
+  }
 
   isAdmin(): Promise<any> {
     return new Promise((resolve, reject) => {
       firebase
         .database()
         .ref(`userProfile/${this.userId}/admin`)
-        .once('value', adminSnapshot => {
+        .once("value", adminSnapshot => {
           resolve(adminSnapshot.val());
-      });
+        });
     });
   }
 }
