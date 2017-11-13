@@ -12,16 +12,14 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Welcome {{displayName}}</h3>
+<ion-content>
 
+  <h3>Welcome Citizen</h3>
 
-  <button ion-button block color="primary" (click)="goToCreate()">
-    Provide Detail about your Player Character
-  </button>
+  <div class="spacer" style="height: 5%"></div>
 
   <button ion-button block color="primary" (click)="goToList()">
-    See all characters
+    Characters
   </button>
 
 <!--  <ion-item *ngFor="let item of items | async">

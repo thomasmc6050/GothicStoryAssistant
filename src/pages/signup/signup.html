@@ -6,12 +6,15 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Create an Account</ion-title>
+     <ion-title>Welcome Traveler</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <img src="assets/img/banner.jpg" />
+<ion-content padding="true" style="background: url(https://firebasestorage.googleapis.com/v0/b/gothic-larp.appspot.com/o/aaboran-e1486307145358-400x150.jpg?alt=media&token=62f1c517-9773-4b88-98f6-c31e16e0dd1d) no-repeat center;background-size:cover;"
+  class="manual-ios-statusbar-padding">
+
+  <div class="spacer" style="height: 33%;"></div>
+
   <form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
     <ion-item>
       <ion-label stacked>Email</ion-label>
@@ -35,4 +38,15 @@
       Create an Account
     </button>
   </form>
+
+    <div class="spacer" style="height: 9%;"></div>
+  <div>
+    <p class="quote">
+      “A bridge of silver wings stretches from the dead ashes of an unforgiving nightmare to the jeweled vision of a life started
+      anew.” <br/>
+     ― Aberjhani
+    </p>
+
+  </div>
+
 </ion-content>

@@ -90,4 +90,9 @@
         <variable name="APP_ID" value="124910548221149" />
         <variable name="APP_NAME" value="GothicStoryAssistant" />
     </plugin>
+    <plugin name="cordova-plugin-actionsheet" spec="^2.3.3" />
+    <plugin name="resgrid.cordova.plugins.rollbar" spec="~1.4.0">
+        <variable name="ROLLBAR_ACCESS_TOKEN" value="YOUR_ROLLBAR_ACCEESS_TOKEN" />
+        <variable name="ROLLBAR_ENVIRONMENT" value="ROLLBAR_ENVIRONMENT" />
+    </plugin>
 </widget>

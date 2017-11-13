@@ -20,9 +20,11 @@
     "@angular/http": "4.4.3",
     "@angular/platform-browser": "4.4.3",
     "@angular/platform-browser-dynamic": "4.4.3",
+    "@ionic-native/action-sheet": "^4.4.0",
     "@ionic-native/camera": "^4.3.1",
     "@ionic-native/core": "4.3.0",
     "@ionic-native/facebook": "^4.3.2",
+    "@ionic-native/rollbar": "^4.4.0",
     "@ionic-native/splash-screen": "4.3.0",
     "@ionic-native/status-bar": "4.3.0",
     "@ionic/storage": "2.0.1",
@@ -30,6 +32,7 @@
     "cordova-android": "~6.3.0",
     "cordova-browser": "~5.0.0",
     "cordova-ios": "~4.5.2",
+    "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-camera": "^2.4.1",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.4",
@@ -43,6 +46,7 @@
     "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "3.0.0",
     "promise-polyfill": "^6.0.2",
+    "resgrid-cordova-plugins-rollbar": "^1.4.0",
     "rxjs": "5.4.3",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.18"
@@ -64,6 +68,11 @@
       "cordova-plugin-facebook4": {
         "APP_ID": "124910548221149",
         "APP_NAME": "GothicStoryAssistant"
+      },
+      "cordova-plugin-actionsheet": {},
+      "resgrid.cordova.plugins.rollbar": {
+        "ROLLBAR_ACCESS_TOKEN": "YOUR_ROLLBAR_ACCEESS_TOKEN",
+        "ROLLBAR_ENVIRONMENT": "ROLLBAR_ENVIRONMENT"
       }
     },
     "platforms": [

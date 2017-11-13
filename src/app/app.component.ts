@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from "../pages/home/home";
-import { ListPage } from '../pages/list/list';
+// import { ListPage } from '../pages/list/list';
 import { ProfilePage } from '../pages/profile/profile';
 
 //import firebase from 'firebase';
@@ -14,7 +14,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @Component({
-  selector: "page-menu",
   templateUrl: 'app.html'
 })
 export class MyApp {
@@ -22,7 +21,7 @@ export class MyApp {
 
   rootPage: any;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon: string, iconOutline: string}>;
 
   constructor(
       public platform: Platform,
@@ -40,28 +39,16 @@ export class MyApp {
           authListener.unsubscribe();
         }
       });
-/*
-    firebase.initializeApp(FIREBASE_CREDENTIALS);
 
-  const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-    if (!user) {
-      this.rootPage ='LoginPage';
-      unsubscribe();
-    } else {
-      this.rootPage = HomePage;
-      unsubscribe();
-    }
-  });
-*/
-//    this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title: 'Profile', component: ProfilePage }
+      { title: 'Event', component: HomePage, icon: 'calendar', iconOutline: 'false'},
+      { title: 'Downtime', component: 'DowntimePage', icon: 'walk', iconOutline: 'true'},
+      { title: 'Item Transfer', component: '', icon: 'shirt', iconOutline: 'false'},
+      { title: 'Troop Movement', component: '', icon: 'people', iconOutline: 'true'},
+      { title: 'Profile', component: ProfilePage, icon: 'contact', iconOutline: 'true'}
     ];
-
   }
 
   initializeApp() {

@@ -1,49 +1,30 @@
 <ion-menu [content]="content">
-  <ion-header color='stable'>
-    <ion-toolbar>
-      <ion-title color='assertive' font='Lora'>
-
-<!--        <h3 style="color:#000000;text-align:left;"> -->
-          Gothic Town Crier
-<!--        </h3>  -->
-
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!--
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+            Menu
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+  -->
 
   <ion-content>
-    <div class="spacer" style="width: 248px; height: 13px;"></div>
+    <div class="spacer" style="width: 248px; height: 4%;"></div>
+    <div class="my-menu-title">Gothic Town Crier</div>
+    <div class="spacer" style="width: 248px; height: 10%;"></div>
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" style='font-family:Lora'>
-        {{p.title}}
-      </button>
+      <ion-row no-padding>
+        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" style='font-family:Lora'>
+          <ion-col>
+              <ion-icon name="{{p.icon}}" align-center isActive="{{p.iconOutline}}"></ion-icon>
+          </ion-col>
+          <ion-col>
+              {{p.title}}
+          </ion-col>
+        </button>
+      </ion-row>
     </ion-list>
-
-
-  <div class="spacer" data-componentid="spacer1" style="width: 248px; height: 13px;"></div>
-  <h3 style="text-align:center;" color='$primary'>Gothic Town Crier</h3>
-  <div class="spacer" data-componentid="spacer2" style="width: 248px; height: 22px;"></div>
-  <ion-list>
-    <ion-item class="item-icon-left" id="menu-list-item4" ui-sref="townCrier()" menu-close="" data-componentid="list-item4">
-      <ion-icon name="ion-android-calendar"></ion-icon>Events</ion-item>
-    <ion-item class="item-icon-left" id="menu-list-item10" ui-sref="economy()" menu-close="" data-componentid="list-item10">
-      <ion-icon name="ion-android-walk"></ion-icon>Downtime</ion-item>
-    <ion-item class="item-icon-left" id="menu-list-item8" ui-sref="mercantile()" menu-close="" ng-disabled="" data-componentid="list-item8">
-      <ion-icon name="ion-tshirt"></ion-icon>Item Transfer</ion-item>
-    <ion-item class="item-icon-left" id="menu-list-item9" ui-sref="military()" menu-close="" data-componentid="list-item9">
-      <ion-icon name="ion-ios-people"></ion-icon>Troop Movement</ion-item>
-    <ion-item class="item-icon-left" id="menu-list-item7" ui-sref="characterLogin()" menu-close="" data-componentid="list-item7">
-      <ion-icon name="ion-ios-contact-outline"></ion-icon>Profile</ion-item>
-  </ion-list>
-
-
-
   </ion-content>
-
 </ion-menu>
-
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
-
-
-
